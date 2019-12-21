@@ -1,0 +1,483 @@
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="description" content="Spin the brawler roulette and pick yourself a random brawler!">
+	<title>Random Brawler Selector</title>
+	<link rel="icon" href="img/favicon.png">
+</head>
+<style>
+	body {
+		height: 100%;
+		background: linear-gradient(0deg, rgba(0,101,168,1) 0%, rgba(0,67,134,1) 100%);
+		margin: 0px;
+		overflow: hidden;
+		user-select: none;
+	}
+	.roulette {
+		position: absolute;
+		width: 40%;
+		transform: translate(-50%,-50%);
+		top: 50%;
+		left: 50%;
+		border: 5px solid black;
+		filter: drop-shadow(10px 10px black);
+		cursor: pointer;
+		overflow: hidden;
+		z-index: 0;
+	}
+	.roulette img {
+		width: 100%;
+	}
+	.winner {
+		position: absolute;
+		width: 40%;
+		transform: translate(-50%,-50%);
+		top: 50%;
+		left: 50%;
+		cursor: pointer;
+		transition-duration: 1s;
+		border: 5px solid black;
+		visibility: hidden;
+		z-index: 100;
+		overflow: hidden;
+	}
+	.winner img {
+		width: 100%;
+	}
+
+	.winner:after {
+	content:'';
+  top:0;
+  left:0;
+	transform:translateX(100%);
+	width:100%;
+	height:100%;
+	position: absolute;
+	z-index:1;
+	animation: slide 7s infinite;
+background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%);
+}
+
+	@keyframes slide {
+	0% {transform:translateX(-100%);}
+	10% {transform:translateX(100%);}
+	100% {transform:translateX(100%);}
+}
+	.hideIt {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		opacity: 0;
+		visibility: hidden;
+		transition-duration: 1s;
+		background: linear-gradient(0deg, rgba(0,101,168,1) 0%, rgba(0,67,134,1) 100%);
+		z-index: 1;
+	}
+	.ctr {
+		position: absolute;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		font-size: 30px;
+		width: 100%;
+		text-align: center;
+		top: 18%;
+		text-shadow: 3px 3px black, 0 2px black, 2px 0 black,-2px -2px black, 0 -2px black, -2px 0 black,2px -2px black,-2px 2px black;
+		transform: rotate(-2deg);
+		animation-name: rotating;
+		animation-duration: 4s;
+		animation-iteration-count: infinite;
+		opacity: 1;
+		transition-duration: 1s;
+	}
+
+	@keyframes rotating {
+		0%   {transform: rotate(-2deg);}
+		50%  {transform: rotate(2deg);}
+		100%  {transform: rotate(-2deg);}
+	}
+
+	.updating {
+		position: absolute;
+		font-family: 'Lilita One', cursive;
+		color: rgba(255,255,255,.7);
+		font-size: 30px;
+		text-align: center;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+	}
+
+	.brawler {
+		position: absolute;
+		transition-duration: 1s;
+		opacity: 0;
+		height: 40px;
+	}
+
+	.brawler p {
+		margin: 0px;
+		padding: 0px;
+		font-family: 'Lilita One', cursive;
+	}
+
+	.container {
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		cursor: pointer;
+		font-size: 22px;
+		transform: translate(0, -50%);
+		top: 50%;
+		left: 10px;
+		color: white;
+		font-weight: bold;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.container .checkbox {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	.checkmark {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 25px;
+		width: 25px;
+		background-color: #eee;
+		border-radius: 7px;
+	}
+
+	.container:hover .checkbox ~ .checkmark {
+		background-color: #ccc;
+	}
+
+	.container .checkbox:checked ~ .checkmark {
+		background-color: #1bc912;
+	}
+
+	.checkmark:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
+
+	.container .checkbox:checked ~ .checkmark:after {
+		display: block;
+	}
+
+	.container .checkmark:after {
+		left: 9px;
+		top: 5px;
+		width: 5px;
+		height: 10px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+	.brawlers {
+		position: absolute;
+		width: 100%;
+		top:-25px;
+	}
+	.left {
+		left: 0px;
+	}
+	.right {
+		left: 160px;
+	}
+	.brawler {
+		z-index: 4;
+	}
+	.sawrapper {
+		top: 30px;
+		left: 300px;
+		position: absolute;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		opacity: 0;
+		visibility: hidden;
+		z-index: 6;
+	}
+	.selectall {
+		position: relative;
+		background-color: #00a4ff;
+		box-shadow: 0px 7px 0px 0px rgb(4,120,220);
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+	}
+	.sawrapper:active {
+		top: 34px;
+		padding-bottom: 3px;
+	}
+	.sawrapper:active > .selectall {
+		box-shadow: 0px 3px 0px 0px rgb(4,120,220);
+	}
+
+	.dawrapper {
+		top: 80px;
+		left: 300px;
+		position: absolute;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		opacity: 0;
+		visibility: hidden;
+		z-index: 5;
+	}
+	.deselectall {
+		position: relative;
+		background-color: #dc342c;
+		box-shadow: 0px 7px 0px 0px #b8104c;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+	}
+	.dawrapper:active {
+		top: 84px;
+		padding-bottom: 3px;
+	}
+	.dawrapper:active > .deselectall {
+		box-shadow: 0px 3px 0px 0px #b8104c;
+	}
+	.float-e {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		z-index: 999;
+		left: 50%;
+		top: 50px;
+		font-family: 'Lilita One', cursive;
+		color: #e62e2e;
+		font-weight: bold;
+		font-size: 30px;
+		pointer-events: none;
+		letter-spacing: 1px;
+		text-shadow:
+		-1px -1px 0 #4f0000,  
+		1px -1px 0 #4f0000,
+		-1px 1px 0 #4f0000,
+		2px 2px 0 #4f0000;
+	}
+	.invi_wall {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 1000;
+		display: none;
+	}
+</style>
+<body>
+	<div class="roulette" style="display:none;"></div>
+	<div class="winner"><img src=""/></div>
+	<div class="hideIt"><div class="updating">UPDATING...</div></div>
+	<div class="ctr">CLICK TO ROLL!</div>
+	<div class="brawlers"><div class="brawler"></div><div class="sawrapper"><div class="selectall">SELECT ALL</div></div><div class="dawrapper"><div class="deselectall">DESELECT ALL</div></div></div>
+	<img src="img/cog.png" class="settings" style="height: 50px; left: 5px; bottom: 5px; position: absolute; cursor: pointer;z-index: 3;"/>
+	<div class="invi_wall"></div>
+	<script src="jquery.js"></script>
+	<script src="roulette.js"></script>
+	<script>
+		rolling = 0;
+		set_opened = 0;
+		float_errors = 0;
+		var showIt;
+		all_brawlers = ["shelly","nita","colt","bull","jessie","brock","dynamike","bo","tick","8-bit","emz","el primo","barley","poco","rosa","rico","darryl","penny","carl","piper","pam","frank","bibi","bea","mortis","tara","gene","max","spike","crow","leon","sandy"];
+		brawlers = ["shelly","nita","colt","bull","jessie","brock"];
+
+		function float_error(text){
+			float_errors++;
+			$(" body ").append("<div id=\"error_float"+float_errors+"\" class=\"float-e\">"+text+"</div>");
+			console.log(event.pageY);
+			$("#error_float"+float_errors).animate({
+				top: event.pageY-50+"px",
+				opacity: "0",
+			},5000)
+
+			setTimeout(function(){
+				$(".float-e:not(:animated)").remove();
+			},2100)
+		}
+
+		function update_roulette(){
+			clearTimeout(showIt);
+			$(".hideIt").css({"opacity":"1","visibility":"visible"});
+			setTimeout(function(){
+				$(".roulette").remove();
+				$(".winner").before("<div class=\"roulette\" style=\"display:none;\"></div>");
+				for(brawler in brawlers){
+					$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
+				}
+				$('div.roulette').roulette(option);
+				$('img').on('dragstart', function(event) { event.preventDefault(); });
+				$('div.roulette').on("click",function(){
+					if(rolling == 0){
+						$('div.roulette').roulette("start");
+						rolling = 1
+						setTimeout(function(){
+							rolling = 0;
+						},5000);
+					}
+				})
+			},1000);
+			showIt = setTimeout(function(){
+				$(".hideIt").css({"opacity":"0","visibility":"hidden"});
+			},1100);}
+
+			$(".settings").on("click",function(){
+				left_top = 0;
+				right_top = 0;
+				delay = 100;
+				if(set_opened == 0) {
+					$(".brawlers").css("display","block");
+					for(brawler in all_brawlers){
+						if(brawlers.includes(all_brawlers[brawler]) === true){
+							checked = "checked"
+						} else {
+							checked = ""
+						}
+						if(parseInt(brawler) < Math.ceil(all_brawlers.length/2)) {
+							left_top = left_top + 30;
+							$("<div class=\"brawler left\" style=\"top:"+left_top+"px\"><label class=\"container\"> <p class=\"name\">"+all_brawlers[brawler].toUpperCase()+"</p><input type=\"checkbox\" class=\"checkbox\" "+checked+"><span class=\"checkmark\"></span></label></div>").insertAfter( $( ".brawler" ).last() );
+						} else {
+							right_top = right_top + 30;
+							$("<div class=\"brawler right\" style=\"top:"+right_top+"px\"><label class=\"container\"> <p class=\"name\">"+all_brawlers[brawler].toUpperCase()+"</p><input type=\"checkbox\" class=\"checkbox\" "+checked+"><span class=\"checkmark\"></span></label></div>").insertAfter( $( ".brawler" ).last() );
+						}
+						showBrawler(parseInt(brawler)+2);
+					}
+					setTimeout(function(){$(".sawrapper").css({"opacity":"1","visibility":"visible"});},1300);
+					setTimeout(function(){$(".dawrapper").css({"opacity":"1","visibility":"visible"});},1330);
+					set_opened = 1;
+					$(".checkbox").change(function(){
+						brawler_name = $(this).parent().find(".name").text().toLowerCase();
+						if(brawlers.includes(brawler_name) == false) {
+							brawlers.push(brawler_name);
+						} else {
+							if(brawlers.length > 1){
+								index = brawlers.indexOf(brawler_name);
+								brawlers.splice(index,1);
+							} else {
+								float_error("<center>YOU NEED TO HAVE AT LEAST <br>ONE ACTIVE BRAWLER!</center>");
+								$(this).prop('checked', true);
+							}
+						}
+						if(brawlers.length > 1){
+							update_roulette()}
+
+						});
+				} else {
+					$(".sawrapper").css({"opacity":"0","visibility":"hidden"});
+					$(".dawrapper").css({"opacity":"0","visibility":"hidden"});
+					$(".brawlers").fadeOut("normal",function(){
+						$(".brawler").not(".brawler:first").remove();
+					})
+					set_opened = 0;
+				}
+			});
+
+			function showBrawler(number){
+				setTimeout(function(){$(".brawler:nth-child("+number+")").css("opacity","1");},delay);
+				delay = delay + 30;
+			};
+
+			for(brawler in brawlers){
+				$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
+			}
+
+			var option = {
+				speed : 100,
+				duration : 3,
+				stopImageNumber : -1,
+				startCallback : function() {
+					$(".ctr").css("opacity","0");
+					$(".invi_wall").css("display","block");
+				},
+				slowDownCallback : function() {
+					console.log('slowDown');
+				},
+				stopCallback : function($stopElm) {
+					$(".winner img").attr("src","img/"+brawlers[p.stopImageNumber]+".png");
+					$(".winner").css({"width":"45%","visibility": "visible"});
+					if(brawlers.length > 1){
+						if(set_opened == 1){
+							$("p").filter(function() { return ($(this).text() === brawlers[p.stopImageNumber].toUpperCase()) }).parent().find(".checkbox").prop( "checked", false );
+						}
+						brawlers.splice(p.stopImageNumber,1);}
+						setTimeout(function(){
+							$(".hideIt").css({"opacity":"1","visibility":"visible","z-index":"99"});
+							$(".invi_wall").css("display","none");
+						},100);
+					}
+				}
+				$('div.roulette').roulette(option);
+				$('div.roulette').on("click",function(){
+					if(rolling == 0){
+						$('div.roulette').roulette("start");
+						rolling = 1
+						setTimeout(function(){
+							rolling = 0;
+						},5000);
+					}
+				});
+				$('img').on('dragstart', function(event) { event.preventDefault(); });	
+				$(".winner").on("click",function(){
+					$(".ctr").css("opacity","1");
+					$(".roulette").remove();
+					$(".winner").before("<div class=\"roulette\" style=\"display:none;\"></div>");
+					for(brawler in brawlers){
+						$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
+					}
+					$(".winner").css({"width":"40%","visibility": "hidden"});
+					setTimeout(function(){
+						$(".hideIt").css({"opacity":"0","visibility":"hidden","z-index":"1"});
+					},100);
+					$('div.roulette').roulette(option);
+					$('img').on('dragstart', function(event) { event.preventDefault(); });
+					$('div.roulette').on("click",function(){
+						if(rolling == 0){
+							$('div.roulette').roulette("start");
+							rolling = 1
+							setTimeout(function(){
+								rolling = 0;
+							},5000);
+						}
+					})	
+				});
+
+				$(".sawrapper").on("click",function(){
+					brawlers = all_brawlers.slice();
+					$(".brawler .container .checkbox").prop('checked', true);
+					update_roulette();
+				});
+
+				$(".dawrapper").on("click",function(){
+					brawlers = ["shelly"]
+					$(".brawler .container .checkbox").prop('checked', false);
+					$(".brawler .container .checkbox").first().prop('checked', true);
+					update_roulette();
+				});
+			</script>
+		</body>
+		</html>
