@@ -47,23 +47,23 @@
 	}
 
 	.winner:after {
-	content:'';
-  top:0;
-  left:0;
-	transform:translateX(100%);
-	width:100%;
-	height:100%;
-	position: absolute;
-	z-index:1;
-	animation: slide 7s infinite;
-background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%);
-}
+		content:'';
+		top:0;
+		left:0;
+		transform:translateX(100%);
+		width:100%;
+		height:100%;
+		position: absolute;
+		z-index:1;
+		animation: slide 7s infinite;
+		background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%);
+	}
 
 	@keyframes slide {
-	0% {transform:translateX(-100%);}
-	10% {transform:translateX(100%);}
-	100% {transform:translateX(100%);}
-}
+		0% {transform:translateX(-100%);}
+		10% {transform:translateX(100%);}
+		100% {transform:translateX(100%);}
+	}
 	.hideIt {
 		position: absolute;
 		height: 100%;
@@ -81,7 +81,7 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		font-size: 30px;
 		width: 100%;
 		text-align: center;
-		top: 18%;
+		top: 15%;
 		text-shadow: 3px 3px black, 0 2px black, 2px 0 black,-2px -2px black, 0 -2px black, -2px 0 black,2px -2px black,-2px 2px black;
 		transform: rotate(-2deg);
 		animation-name: rotating;
@@ -188,12 +188,33 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		-ms-transform: rotate(45deg);
 		transform: rotate(45deg);
 	}
-	.brawlers {
+	.brawler_wrapper {
+		background: linear-gradient(0deg, rgba(0,101,168,1) 0%, rgba(0,67,134,1) 100%);
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		top:-25px;
+		top:0px;
+		left: 0px;
 		display: none;
+	}
+
+	.brawler_wrapper p {
+		position: absolute;
+		margin: 0px;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		font-size: 30px;
+		width: 100%;
+		text-align: center;
+		text-shadow: 3px 3px black, 0 2px black, 2px 0 black,-2px -2px black, 0 -2px black, -2px 0 black,2px -2px black,-2px 2px black;
+	}
+	.brawlers {
+		position: absolute;
+		width: Calc(100% - 50px);
+		height: Calc(100% - 75px);
+		top:75px;
+		left: 50px;
+		overflow-y: scroll;
 	}
 	.left {
 		left: 0px;
@@ -205,15 +226,14 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		z-index: 4;
 	}
 	.sawrapper {
-		top: 30px;
-		left: 300px;
+		top: 35px;
+		right: Calc(50% + 10px);
+		font-size: 12px;
 		position: absolute;
 		border: 2px solid black;
 		padding-bottom: 7px;
 		padding-top: 0px;
 		transition-duration: 0.2s;
-		opacity: 0;
-		visibility: hidden;
 		z-index: 6;
 	}
 	.selectall {
@@ -226,9 +246,10 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		text-shadow: 1px 1px black;
 		cursor: pointer;
 		transition-duration: 0.2s;
+		text-align: center;
 	}
 	.sawrapper:active {
-		top: 34px;
+		top: 39px;
 		padding-bottom: 3px;
 	}
 	.sawrapper:active > .selectall {
@@ -236,15 +257,14 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 	}
 
 	.dawrapper {
-		top: 80px;
-		left: 300px;
+		top: 35px;
+		left: Calc(50% + 0px);
+		font-size: 12px;
 		position: absolute;
 		border: 2px solid black;
 		padding-bottom: 7px;
 		padding-top: 0px;
 		transition-duration: 0.2s;
-		opacity: 0;
-		visibility: hidden;
 		z-index: 5;
 	}
 	.deselectall {
@@ -257,9 +277,10 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		text-shadow: 1px 1px black;
 		cursor: pointer;
 		transition-duration: 0.2s;
+		text-align: center;
 	}
 	.dawrapper:active {
-		top: 84px;
+		top: 39px;
 		padding-bottom: 3px;
 	}
 	.dawrapper:active > .deselectall {
@@ -292,13 +313,17 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 	}
 	.creator {
 		position: absolute;
-		bottom: 0px;
-		right: 10px;
+		top: 30px;
+		left: 50px;
 		cursor: pointer;
 		font-family: 'Lilita One', cursive;
 		color: white;
 		text-decoration: none;
 		font-size: 20px;
+	}
+
+	.creator:hover {
+		text-decoration: underline;
 	}
 	.creator img {
 		position: absolute;
@@ -308,13 +333,29 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		height: 30px;
 		border: solid white 3px;
 	}
+	.select_brawler {
+		cursor: pointer;
+	}
+	.select_brawler img {
+		width: 20%;
+		margin-left: 2%;
+		margin-right: 2%;
+		margin-bottom: 2%;
+		float: left;
+		border: 3px solid black;
+		filter: drop-shadow(5px 5px black);
+		transition-duration: 0.2s;
+	}
+	.unselected img {
+		filter:brightness(20%) drop-shadow(5px 5px black);
+	}
 </style>
 <body>
 	<div class="roulette" style="display:none;"></div>
 	<div class="winner"><img src=""/></div>
 	<div class="hideIt"><div class="updating">UPDATING...</div></div>
 	<div class="ctr">CLICK TO ROLL!</div>
-	<div class="brawlers"><div class="brawler"></div><div class="sawrapper"><div class="selectall">SELECT ALL</div></div><div class="dawrapper"><div class="deselectall">DESELECT ALL</div></div><a href="https://www.reddit.com/user/Kewbin" class="creator" target="_blank"><img src="img/kewbin.png">KEWBIN</a></div>
+	<div class="brawler_wrapper"><a href="https://twitter.com/Kewbin1" class="creator" target="_blank"><img src="img/twitter.png">@KEWBIN1</a><p>BRAWLERS</p><div class="sawrapper"><div class="selectall">SELECT ALL</div></div><div class="dawrapper"><div class="deselectall">DESELECT ALL</div></div><div class="brawlers"></div></div>
 	<img src="img/cog.png" class="settings" style="height: 50px; left: 5px; bottom: 5px; position: absolute; cursor: pointer;z-index: 3;"/>
 	<div class="invi_wall"></div>
 	<script src="jquery.js"></script>
@@ -330,7 +371,6 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		function float_error(text){
 			float_errors++;
 			$(" body ").append("<div id=\"error_float"+float_errors+"\" class=\"float-e\">"+text+"</div>");
-			console.log(event.pageY);
 			$("#error_float"+float_errors).animate({
 				top: event.pageY-50+"px",
 				opacity: "0",
@@ -342,85 +382,65 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 		}
 
 		function update_roulette(){
-			clearTimeout(showIt);
-			$(".hideIt").css({"opacity":"1","visibility":"visible"});
-			setTimeout(function(){
-				$(".roulette").remove();
-				$(".winner").before("<div class=\"roulette\" style=\"display:none;\"></div>");
-				for(brawler in brawlers){
-					$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
+			$(".roulette").remove();
+			$(".winner").before("<div class=\"roulette\" style=\"display:none;\"></div>");
+			for(brawler in brawlers){
+				$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
+			}
+			$('div.roulette').roulette(option);
+			$('img').on('dragstart', function(event) { event.preventDefault(); });
+			$('div.roulette').on("click",function(){
+				if(rolling == 0){
+					$('div.roulette').roulette("start");
+					rolling = 1
+					setTimeout(function(){
+						rolling = 0;
+					},5000);
 				}
-				$('div.roulette').roulette(option);
-				$('img').on('dragstart', function(event) { event.preventDefault(); });
-				$('div.roulette').on("click",function(){
-					if(rolling == 0){
-						$('div.roulette').roulette("start");
-						rolling = 1
-						setTimeout(function(){
-							rolling = 0;
-						},5000);
-					}
-				})
-			},1000);
-			showIt = setTimeout(function(){
-				$(".hideIt").css({"opacity":"0","visibility":"hidden"});
-			},1100);}
+			});}
 
 			$(".settings").on("click",function(){
 				left_top = 0;
 				right_top = 0;
 				delay = 100;
 				if(set_opened == 0) {
-					$(".brawlers").css("display","block");
 					for(brawler in all_brawlers){
-						if(brawlers.includes(all_brawlers[brawler]) === true){
-							checked = "checked"
+						if(brawlers.includes(all_brawlers[brawler])){
+							$(".brawlers").append("<div class=\"select_brawler\" brawler=\""+all_brawlers[brawler]+"\"><img src=\"img/"+all_brawlers[brawler]+".png\"></div>")
 						} else {
-							checked = ""
+							$(".brawlers").append("<div class=\"select_brawler unselected\" brawler=\""+all_brawlers[brawler]+"\"><img src=\"img/"+all_brawlers[brawler]+".png\"></div>")
 						}
-						if(parseInt(brawler) < Math.ceil(all_brawlers.length/2)) {
-							left_top = left_top + 30;
-							$("<div class=\"brawler left\" style=\"top:"+left_top+"px\"><label class=\"container\"> <p class=\"name\">"+all_brawlers[brawler].toUpperCase()+"</p><input type=\"checkbox\" class=\"checkbox\" "+checked+"><span class=\"checkmark\"></span></label></div>").insertAfter( $( ".brawler" ).last() );
-						} else {
-							right_top = right_top + 30;
-							$("<div class=\"brawler right\" style=\"top:"+right_top+"px\"><label class=\"container\"> <p class=\"name\">"+all_brawlers[brawler].toUpperCase()+"</p><input type=\"checkbox\" class=\"checkbox\" "+checked+"><span class=\"checkmark\"></span></label></div>").insertAfter( $( ".brawler" ).last() );
-						}
-						showBrawler(parseInt(brawler)+2);
-					}
-					setTimeout(function(){$(".sawrapper").css({"opacity":"1","visibility":"visible"});},1300);
-					setTimeout(function(){$(".dawrapper").css({"opacity":"1","visibility":"visible"});},1330);
-					set_opened = 1;
-					$(".checkbox").change(function(){
-						brawler_name = $(this).parent().find(".name").text().toLowerCase();
-						if(brawlers.includes(brawler_name) == false) {
-							brawlers.push(brawler_name);
-						} else {
-							if(brawlers.length > 1){
-								index = brawlers.indexOf(brawler_name);
-								brawlers.splice(index,1);
+					};
+					$(".brawler_wrapper").fadeIn("normal",function(){
+						$(".brawler_wrapper").css("display","block");
+						set_opened = 1;
+						$(".select_brawler").on("click",function(){
+							brawler_name = $(this).attr("brawler");
+							if(brawlers.includes(brawler_name) == false) {
+								brawlers.push(brawler_name);
+								$(this).removeClass("unselected");
 							} else {
-								float_error("<center>YOU NEED TO HAVE AT LEAST <br>ONE ACTIVE BRAWLER!</center>");
-								$(this).prop('checked', true);
+								if(brawlers.length > 1){
+									index = brawlers.indexOf(brawler_name);
+									brawlers.splice(index,1);
+									$(this).addClass("unselected");
+								} else {
+									float_error("<center>YOU NEED TO HAVE AT LEAST <br>ONE ACTIVE BRAWLER!</center>");
+									$(this).prop('checked', true);
+								}
 							}
-						}
-						if(brawlers.length > 1){
-							update_roulette()}
+							if(brawlers.length > 1){
+								update_roulette()}
 
-						});
-				} else {
-					$(".sawrapper").css({"opacity":"0","visibility":"hidden"});
-					$(".dawrapper").css({"opacity":"0","visibility":"hidden"});
-					$(".brawlers").fadeOut("normal",function(){
-						$(".brawler").not(".brawler:first").remove();
-					})
-					set_opened = 0;
-				}
-			});
-
-			function showBrawler(number){
-				setTimeout(function(){$(".brawler:nth-child("+number+")").css("opacity","1");},delay);
-				delay = delay + 30;
-			};
+							});
+					});} else {
+						update_roulette();
+						$(".brawler_wrapper").fadeOut("normal",function(){
+							$(".select_brawler").remove();
+						})
+						set_opened = 0;
+					}
+				});
 
 			for(brawler in brawlers){
 				$(".roulette").append("<img src=\"img/"+brawlers[brawler]+".png\"/>")
@@ -435,7 +455,6 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 					$(".invi_wall").css("display","block");
 				},
 				slowDownCallback : function() {
-					console.log('slowDown');
 				},
 				stopCallback : function($stopElm) {
 					$(".winner img").attr("src","img/"+brawlers[p.stopImageNumber]+".png");
@@ -488,15 +507,15 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.
 
 				$(".sawrapper").on("click",function(){
 					brawlers = all_brawlers.slice();
-					$(".brawler .container .checkbox").prop('checked', true);
-					update_roulette();
+					$(".select_brawler").removeClass("unselected");
 				});
 
 				$(".dawrapper").on("click",function(){
 					brawlers = ["shelly"]
+					$(".select_brawler").addClass("unselected");
+					$(".select_brawler").first().removeClass("unselected");
 					$(".brawler .container .checkbox").prop('checked', false);
 					$(".brawler .container .checkbox").first().prop('checked', true);
-					update_roulette();
 				});
 			</script>
 		</body>
