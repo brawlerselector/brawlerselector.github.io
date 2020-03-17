@@ -4,7 +4,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
 	<meta name="description"
-		content="Spin the brawler wheel and pick yourself a random brawler! Random brawler generator for those who like challenges.">
+		content="Spin the brawler roulette and pick yourself a random brawler! Random brawler generator for those who like challenges.">
 	<title>Random Brawler Selector</title>
 	<link rel="icon" href="img/favicon.png">
 </head>
@@ -476,18 +476,22 @@
 		all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "mortis", "tara", "gene", "max", "mr. p", "spike", "crow", "leon", "sandy"];
 		brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock"];
 
-		const viewport = document.querySelector('.brawlers');
-		const content = document.querySelector('.scroller');
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			$(".brawlers").css({ "overflow-y": "scroll" });
+		} else {
+			const viewport = document.querySelector('.brawlers');
+			const content = document.querySelector('.scroller');
 
-		new ScrollBooster({
-			viewport,
-			content,
-			direction: 'vertical',
-			emulateScroll: true,
-			onUpdate: (state) => {
-				content.style.transform = `translateY(${-state.position.y}px)`;
-			}
-		});
+			new ScrollBooster({
+				viewport,
+				content,
+				direction: 'vertical',
+				emulateScroll: true,
+				onUpdate: (state) => {
+					content.style.transform = `translateY(${-state.position.y}px)`;
+				}
+			});
+		}
 
 		$(".brawlers").on("touchstart mousedown", function () {
 			$(".scrollhint").css("opacity", "0");
