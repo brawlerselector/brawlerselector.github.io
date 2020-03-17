@@ -2,14 +2,14 @@
 
 <head>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-149921965-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-149921965-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-  gtag('config', 'UA-149921965-2');
-</script>
+		gtag('config', 'UA-149921965-2');
+	</script>
 
 	<link href="https://fonts.googleapis.com/css?family=Lilita+One&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
@@ -396,6 +396,7 @@
 
 	.select_brawler img {
 		width: 20%;
+		min-width: 150px;
 		margin-left: 2%;
 		margin-right: 2%;
 		margin-bottom: 2%;
@@ -447,6 +448,100 @@
 			transform: scale(1);
 		}
 	}
+
+	.options {
+		position: absolute;
+		width: Calc(100% - 50px);
+		height: Calc(100% - 75px);
+		top: 75px;
+		left: 50px;
+		overflow: hidden;
+		color: #fff;
+		font-family: 'Lilita One', cursive;
+		text-align: center;
+		display: none;
+	}
+
+
+	.option {
+		position: relative;
+		width: 20%;
+		margin: 20px;
+		float: left;
+	}
+
+	.option_btn {
+		position: absolute;
+		color: #fff;
+		width: 50px;
+		padding: 5px 0px;
+		transform: translate(0%, -50%);
+		top: 50%;
+		border: solid 1px black;
+		cursor: pointer;
+		text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			2px 2px 0 #000;
+	}
+
+	.opt_back {
+		position: absolute;
+		width: 80px;
+		height: 20px;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: 50%;
+		background-color: rgba(0, 0, 0, .4);
+		border-radius: 5px;
+	}
+
+	.opt_on {
+		background-color: #1bc912;
+		border-radius: 10px 0px 0px 10px;
+		border-width: 1px 1px 3px 2px;
+		left: 0px;
+	}
+
+	.opt_off {
+		background-color: #c91212;
+		border-radius: 0px 10px 10px 0px;
+		border-width: 1px 2px 3px 1px;
+		right: 0px;
+	}
+
+	.opt_wrapper {
+		position: relative;
+		transform: translate(-50%);
+		left: 50%;
+		width: 100px;
+		height: 54px;
+	}
+
+	.sidebar_menu {
+		position: absolute;
+		left: 0px;
+		top: 90px;
+		text-align: center;
+		width: 70px;
+	}
+
+	.sidebar_menu img {
+		position: relative;
+		margin-bottom: 20px;
+		cursor: pointer;
+	}
+
+	#brawler_menu {
+		position: relative;
+		width: 60px;
+	}
+
+	#setting_menu {
+		position: relative;
+		width: 35px;
+	}
 </style>
 
 <body>
@@ -456,8 +551,12 @@
 		<div class="updating">UPDATING...</div>
 	</div>
 	<div class="ctr">CLICK TO ROLL!</div>
-	<div class="brawler_wrapper"><a href="https://twitter.com/Kewbin1" class="creator" target="_blank"><img
-				src="img/twitter.png">@KEWBIN1</a>
+	<div class="brawler_wrapper">
+		<div class="sidebar_menu">
+			<img id="brawler_menu" src="img/brawlers.png">
+			<img id="setting_menu" src="img/cog.png">
+		</div>
+		<a href="https://twitter.com/Kewbin1" class="creator" target="_blank"><img src="img/twitter.png">@KEWBIN1</a>
 		<p>BRAWLERS</p>
 		<div class="sawrapper">
 			<div class="selectall">SELECT ALL</div>
@@ -465,19 +564,37 @@
 		<div class="dawrapper">
 			<div class="deselectall">DESELECT ALL</div>
 		</div>
+		<div class="options">
+			<div class="option opt_br_remove">Brawler removal<br>
+				<div class="opt_wrapper">
+					<div class="opt_back"></div>
+					<div id="br_remove" class="option_btn opt_on">ON</div>
+				</div>
+			</div>
+
+			<div class="option opt_br_remove">Brawler voices<br>
+				<div class="opt_wrapper">
+					<div class="opt_back"></div>
+					<div id="br_voice_play" class="option_btn opt_on">ON</div>
+				</div>
+			</div>
+		</div>
 		<div class="brawlers">
 			<div class="scrollhint"><img src="img/scroll.png"><br>Drag to scroll!</div>
 			<div class="scroller"></div>
 		</div>
 	</div>
-	<img src="img/cog.png" class="settings"
-		style="height: 50px; left: 5px; bottom: 5px; position: absolute; cursor: pointer;z-index: 3;" />
+	<img src="img/settings.png" class="settings"
+		style="width: 50px; left: 5px; bottom: 5px; position: absolute; cursor: pointer;z-index: 3;" />
 	<div class="invi_wall"></div>
 	<script src="plugins/jquery.js"></script>
 	<script src="plugins/dragscroll.js"></script>
 	<script src="plugins/roulette.js"></script>
 	<script>
-
+		br_voice = new Audio();
+		br_voice.volume = .5;
+		br_voice_play = 1;
+		br_remove = 1;
 		rolling = 0;
 		set_opened = 0;
 		float_errors = 0;
@@ -595,7 +712,7 @@
 
 		var option = {
 			speed: 100,
-			duration: 3,
+			duration: 1,
 			stopImageNumber: -1,
 			startCallback: function () {
 				$(".ctr").css("opacity", "0");
@@ -604,9 +721,12 @@
 			slowDownCallback: function () {
 			},
 			stopCallback: function ($stopElm) {
+				if (br_voice_play == 1) {
+					br_voice.src = "sfx/" + brawlers[p.stopImageNumber] + ".ogg";
+				}
 				$(".winner img").attr("src", "img/" + brawlers[p.stopImageNumber] + ".png");
 				$(".winner").css({ "width": "45%", "visibility": "visible" });
-				if (brawlers.length > 1) {
+				if (brawlers.length > 1 && br_remove == 1) {
 					if (set_opened == 1) {
 						$("p").filter(function () { return ($(this).text() === brawlers[p.stopImageNumber].toUpperCase()) }).parent().find(".checkbox").prop("checked", false);
 					}
@@ -615,6 +735,9 @@
 				setTimeout(function () {
 					$(".hideIt").css({ "opacity": "1", "visibility": "visible", "z-index": "99" });
 					$(".invi_wall").css("display", "none");
+					if (br_voice_play == 1) {
+						br_voice.play();
+					}
 				}, 100);
 			}
 		}
@@ -675,6 +798,50 @@
 		}).mouseout(function () {
 			$(this).unbind('mousemove');
 		});
+
+		$("#br_remove").on("click", function () {
+			if (br_remove == 1) {
+				br_remove = 0;
+				$(this).removeClass("opt_on");
+				$(this).addClass("opt_off");
+				$(this).text("OFF")
+			} else {
+				br_remove = 1;
+				$(this).removeClass("opt_off");
+				$(this).addClass("opt_on");
+				$(this).text("ON")
+			}
+		})
+
+		$("#br_voice_play").on("click", function () {
+			if (br_voice_play == 1) {
+				br_voice_play = 0;
+				$(this).removeClass("opt_on");
+				$(this).addClass("opt_off");
+				$(this).text("OFF")
+			} else {
+				br_voice_play = 1;
+				$(this).removeClass("opt_off");
+				$(this).addClass("opt_on");
+				$(this).text("ON")
+			}
+		})
+
+		$("#brawler_menu").on("click", function () {
+			$(".brawlers").css("display", "block");
+			$(".options").css("display", "none");
+			$(".brawler_wrapper p").text("BRAWLERS");
+			$(".sawrapper").css("display", "block");
+			$(".dawrapper").css("display", "block");
+		})
+
+		$("#setting_menu").on("click", function () {
+			$(".brawlers").css("display", "none");
+			$(".options").css("display", "block");
+			$(".brawler_wrapper p").text("SETTINGS");
+			$(".sawrapper").css("display", "none");
+			$(".dawrapper").css("display", "none");
+		})
 	</script>
 </body>
 
