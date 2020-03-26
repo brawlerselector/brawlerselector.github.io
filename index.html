@@ -543,9 +543,9 @@
 		position: relative;
 		width: 35px;
 	}
-	
-	
-	
+
+
+
 	@media only screen and (orientation:portrait) {
 		body {
 			height: 100vw;
@@ -565,6 +565,7 @@
 			-ms-transform: rotate(0deg);
 			transform: rotate(0deg);
 		}
+	}
 </style>
 
 <body>
@@ -624,7 +625,11 @@
 		scrolling = 0;
 		var showIt;
 		all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "mortis", "tara", "gene", "max", "mr. p", "spike", "crow", "leon", "sandy"];
-		brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock"];
+		if (isToday(new Date(2020, 3, 1))) {
+			brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "mr. prank"];
+		} else {
+			brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock"];
+		}
 
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			$(".brawlers").css({ "overflow-y": "scroll" });
@@ -801,11 +806,17 @@
 
 		$(".sawrapper").on("click", function () {
 			brawlers = all_brawlers.slice();
+			if (isToday(new Date(2020, 3, 1))) {
+				brawlers.push("mr. prank");
+			}
 			$(".select_brawler").removeClass("unselected");
 		});
 
 		$(".dawrapper").on("click", function () {
 			brawlers = ["shelly"];
+			if (isToday(new Date(2020, 3, 1))) {
+				brawlers.push("mr. prank");
+			}
 			$(".select_brawler").addClass("unselected");
 			$(".select_brawler").first().removeClass("unselected");
 			$(".brawler .container .checkbox").prop('checked', false);
@@ -865,6 +876,13 @@
 			$(".sawrapper").css("display", "none");
 			$(".dawrapper").css("display", "none");
 		})
+
+		function isToday(someDate) {
+			const today = new Date()
+			return someDate.getDate() == today.getDate() &&
+				someDate.getMonth() == today.getMonth() &&
+				someDate.getFullYear() == today.getFullYear()
+		}
 	</script>
 </body>
 
