@@ -1,0 +1,1103 @@
+
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+		border-radius: 10px;
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar {
+		width: 12px;
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+		background-color: #fff;
+	}
+
+	body {
+        height: 100%;
+        width:100%;
+		background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+		margin: 0px;
+		overflow: hidden;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+    }
+    
+    .global_bg {
+        height: 100%;
+        width:100%;
+		background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+    }
+
+	.roulette {
+		position: absolute;
+		width: 40%;
+		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		border: 5px solid black;
+		filter: drop-shadow(10px 10px black);
+		cursor: pointer;
+		overflow: hidden;
+		z-index: 0;
+	}
+
+	.roulette img {
+		width: 100%;
+	}
+
+	.winner {
+		position: absolute;
+		width: 40%;
+		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		cursor: pointer;
+		transition-duration: 1s;
+		border: 5px solid black;
+		visibility: hidden;
+		z-index: 100;
+	}
+
+	.winner .winner_img {
+		width: 100%;
+	}
+
+	@keyframes slide {
+		0% {
+			transform: translateX(-100%);
+		}
+
+		10% {
+			transform: translateX(100%);
+		}
+
+		100% {
+			transform: translateX(100%);
+		}
+	}
+
+	.hideIt {
+		position: absolute;
+		height: 100%;
+        width: 100%;
+        top: 0px;
+		opacity: 0;
+		visibility: hidden;
+		transition-duration: 1s;
+		background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+        z-index: 1;
+        overflow: hidden;
+	}
+
+	.ctr {
+		position: absolute;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		font-size: 30px;
+		width: 100%;
+		text-align: center;
+		top: 15%;
+		text-shadow: 3px 3px black, 0 2px black, 2px 0 black, -2px -2px black, 0 -2px black, -2px 0 black, 2px -2px black, -2px 2px black;
+		transform: rotate(-2deg);
+		animation-name: rotating;
+		animation-duration: 4s;
+		animation-iteration-count: infinite;
+		opacity: 1;
+		transition-duration: 1s;
+	}
+
+	@keyframes rotating {
+		0% {
+			transform: rotate(-2deg);
+		}
+
+		50% {
+			transform: rotate(2deg);
+		}
+
+		100% {
+			transform: rotate(-2deg);
+		}
+	}
+
+	.updating {
+		position: absolute;
+		font-family: 'Lilita One', cursive;
+		color: rgba(255, 255, 255, .7);
+		font-size: 30px;
+		text-align: center;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.brawler {
+		position: absolute;
+		transition-duration: 1s;
+		opacity: 0;
+		height: 40px;
+	}
+
+	.brawler p {
+		margin: 0px;
+		padding: 0px;
+		font-family: 'Lilita One', cursive;
+	}
+
+	.container {
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		cursor: pointer;
+		font-size: 22px;
+		transform: translate(0, -50%);
+		top: 50%;
+		left: 10px;
+		color: white;
+		font-weight: bold;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.container .checkbox {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	.checkmark {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 25px;
+		width: 25px;
+		background-color: #eee;
+		border-radius: 7px;
+	}
+
+	.container:hover .checkbox~.checkmark {
+		background-color: #ccc;
+	}
+
+	.container .checkbox:checked~.checkmark {
+		background-color: #1bc912;
+	}
+
+	.checkmark:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
+
+	.container .checkbox:checked~.checkmark:after {
+		display: block;
+	}
+
+	.container .checkmark:after {
+		left: 9px;
+		top: 5px;
+		width: 5px;
+		height: 10px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+	.brawler_wrapper {
+		background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+		display: none;
+	}
+
+	.brawler_wrapper p {
+		position: relative;
+		margin: 0px;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		font-size: 30px;
+		width: 100%;
+		text-align: center;
+		text-shadow: 3px 3px black, 0 2px black, 2px 0 black, -2px -2px black, 0 -2px black, -2px 0 black, 2px -2px black, -2px 2px black;
+	}
+
+	.brawlers {
+		position: absolute;
+		width: Calc(100% - 50px);
+		height: Calc(100% - 75px);
+		top: 75px;
+		left: 50px;
+		overflow: hidden;
+	}
+
+	.starpowers {
+		position: absolute;
+		width: Calc(100% - 50px);
+		height: Calc(100% - 75px);
+		top: 75px;
+		left: 50px;
+		overflow: hidden;
+		cursor: grab;
+		visibility: hidden;
+	}
+
+	.left {
+		left: 0px;
+	}
+
+	.right {
+		left: 160px;
+	}
+
+	.brawler {
+		z-index: 4;
+	}
+
+	.sawrapper {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 6;
+	}
+
+	.selectall {
+		position: relative;
+		background-color: #00a4ff;
+		box-shadow: 0px 7px 0px 0px rgb(4, 120, 220);
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.sawrapper:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.sawrapper:active>.selectall {
+		box-shadow: 0px 3px 0px 0px rgb(4, 120, 220);
+	}
+
+	.dawrapper {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 5;
+	}
+
+	.deselectall {
+		position: relative;
+		background-color: #dc342c;
+		box-shadow: 0px 7px 0px 0px #b8104c;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.dawrapper:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.dawrapper:active>.deselectall {
+		box-shadow: 0px 3px 0px 0px #b8104c;
+	}
+
+	.qswrapper {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 5;
+	}
+
+	.quicksetup {
+		position: relative;
+		background-color: #49dc2c;
+		box-shadow: 0px 7px 0px 0px #10b848;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.qswrapper:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.qswrapper:active>.quicksetup {
+		box-shadow: 0px 3px 0px 0px #10b848;
+    }
+    
+    .qsswrapper {
+		top: 0px;
+		font-size: 18px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+        z-index: 5;
+        margin-bottom: 0px;
+	}
+
+	.qs_submit {
+		position: relative;
+		background-color: #49dc2c;
+        box-shadow: 0px 7px 0px 0px #10b848;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px 20px 5px 20px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+        text-align: center;
+        outline: none;
+        border: none;
+	}
+
+	.qsswrapper:active {
+		top: 4px;
+        padding-bottom: 3px;
+        margin-bottom: 4px;
+	}
+
+	.qsswrapper:active>.qs_submit {
+		box-shadow: 0px 3px 0px 0px #10b848;
+	}
+
+	.float-e {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		z-index: 999;
+		left: 50%;
+		top: 50px;
+		font-family: 'Lilita One', cursive;
+		color: #e62e2e;
+		font-weight: bold;
+		font-size: 30px;
+		pointer-events: none;
+		letter-spacing: 1px;
+		text-shadow:
+			-1px -1px 0 #4f0000,
+			1px -1px 0 #4f0000,
+			-1px 1px 0 #4f0000,
+			2px 2px 0 #4f0000;
+	}
+
+	.invi_wall {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 1000;
+		display: none;
+	}
+
+	.creator {
+		position: relative;
+		cursor: pointer;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		text-decoration: none;
+		font-size: 20px;
+	}
+
+	.creator:hover {
+		text-decoration: underline;
+	}
+
+	.creator img {
+		position: absolute;
+		top: -8px;
+		left: -40px;
+		border-radius: 50%;
+		height: 30px;
+		border: solid white 3px;
+	}
+
+	.select_brawler {
+		position: relative;
+		width: 20%;
+		margin-left: 2%;
+		margin-right: 2%;
+		margin-bottom: 2%;
+		border: 3px solid black;
+		filter: drop-shadow(5px 5px black);
+		text-align: center;
+		min-width: 160px;
+		display: inline-block;
+	}
+
+	.br_starpowers {
+		background: linear-gradient(100deg, rgb(241, 157, 0) 19%, rgb(255, 210, 0) 20%, rgb(255, 210, 0) 80%, rgba(241, 157, 0) 81%);
+	}
+
+	.brawler_sp {
+		position: relative;
+		margin: 2px 15px 2px 15px;
+		display: inline-block;
+		cursor: pointer;
+	}
+
+	.sp_unselected {
+		filter: grayscale(1) brightness(0.7);
+	}
+
+	.sp_bg {
+		position: relative;
+		height: 50px;
+	}
+
+	.scroller {
+		text-align: center;
+	}
+
+	.select_brawler .sp_icon_image {
+		position: absolute;
+		max-height: 20px;
+		max-width: 20px;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: Calc(50% - 3px);
+	}
+
+	.select_brawler .brawler_img {
+		cursor: pointer;
+		position: relative;
+		width: 100%;
+		transition-duration: 0.2s;
+	}
+
+	.br_general {
+		position: relative;
+		width: 20%;
+		float: left;
+	}
+
+	.sp_icon_select {
+		max-height: 45%;
+		width: auto;
+		float: right;
+
+	}
+
+	.unselected .brawler_img {
+		filter: brightness(20%);
+	}
+
+	.unselected .choose_brawler_name {
+		filter: brightness(20%);
+	}
+
+	.scrollhint {
+		transform: translate(-50%);
+		left: 50%;
+		top: 75%;
+		position: absolute;
+		color: #fff;
+		font-family: 'Lilita One', cursive;
+		font-size: 18px;
+		z-index: 2;
+		background: rgba(0, 0, 0, .4);
+		padding: 5px;
+		width: 200px;
+		text-align: center;
+		border-radius: 10px;
+		transition-duration: 1s;
+	}
+
+	.scrollhint img {
+		position: relative;
+		height: 50px;
+		filter: invert(1);
+		margin-bottom: 2px;
+		animation: bobbing 3s infinite;
+	}
+
+	@keyframes bobbing {
+		0% {
+			transform: scale(1);
+		}
+
+		50% {
+			transform: scale(1.1);
+		}
+
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	.options {
+		position: absolute;
+		width: Calc(100% - 50px);
+		height: Calc(100% - 75px);
+		top: 75px;
+		left: 50px;
+		overflow: hidden;
+		color: #fff;
+		font-family: 'Lilita One', cursive;
+		text-align: center;
+		display: none;
+		z-index: 2;
+	}
+
+
+	.option {
+		position: relative;
+		width: 20%;
+		margin: 20px;
+		float: left;
+	}
+
+	.option_btn {
+		position: absolute;
+		color: #fff;
+		width: 50px;
+		padding: 5px 0px;
+		transform: translate(0%, -50%);
+		top: 50%;
+		border: solid 1px black;
+		cursor: pointer;
+		text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			2px 2px 0 #000;
+	}
+
+	.opt_back {
+		position: absolute;
+		width: 80px;
+		height: 20px;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: 50%;
+		background-color: rgba(0, 0, 0, .4);
+		border-radius: 5px;
+	}
+
+	.opt_on {
+		background-color: #1bc912;
+		border-radius: 10px 0px 0px 10px;
+		box-shadow: inset 3px 3px 0px 0px #2adf20;
+		border-width: 1px 1px 3px 2px;
+		left: 0px;
+	}
+
+	.opt_off {
+		background-color: #c91212;
+		border-radius: 0px 10px 10px 0px;
+		box-shadow: inset -3px 3px 0px 0px #d32323;
+		border-width: 1px 2px 3px 1px;
+		right: 0px;
+	}
+
+	.opt_wrapper {
+		position: relative;
+		transform: translate(-50%);
+		left: 50%;
+		width: 100px;
+		height: 54px;
+	}
+
+	.about {
+		position: absolute;
+		width: Calc(100% - 70px);
+		height: Calc(100% - 75px);
+		top: 75px;
+		left: 70px;
+		overflow: hidden;
+		font-weight: normal;
+		color: #fff;
+		font-family: 'Calibri';
+		font-size: 20px;
+		text-align: center;
+		display: none;
+        z-index: 2;
+	}
+
+	.supercell-fan-policy {
+		font-weight: bold;
+		color: #fff;
+	}
+
+	.sidebar_menu {
+		position: absolute;
+		left: 0px;
+		top: 90px;
+		text-align: center;
+		width: 70px;
+	}
+
+	.sidebar_menu img {
+		position: relative;
+		margin-bottom: 20px;
+		cursor: pointer;
+	}
+
+	.selected_menu {
+		position: absolute;
+		left: 0px;
+		border-radius: 0px 10px 10px 0px;
+		width: 70px;
+		height: 55px;
+		top: -10px;
+		background: rgba(255, 255, 255, .4);
+		transition-duration: .2s;
+	}
+
+	#brawler_menu {
+		position: relative;
+		width: 60px;
+	}
+
+	#starpower_menu {
+		position: relative;
+		width: 35px;
+	}
+
+	#setting_menu {
+		position: relative;
+		width: 35px;
+	}
+
+	#info_menu {
+		position: relative;
+		height: 37px;
+	}
+
+	.winner_sp {
+		position: absolute;
+		height: 120px;
+		transform: translate(50%, -50%) scale(0);
+		top: 0px;
+		right: 0px;
+		transition-duration: .3s;
+		transition-timing-function: cubic-bezier(0.250, 0.250, 0.455, 1.650);
+		z-index: 102;
+	}
+
+	.sp_icon {
+		position: absolute;
+		max-height: 50px;
+		max-width: 50px;
+		transform: translate(50%, -50%) scale(0);
+		top: -5px;
+		right: 0px;
+		transition-duration: .3s;
+		transition-timing-function: cubic-bezier(0.250, 0.250, 0.455, 1.650);
+		z-index: 102;
+	}
+
+	.sp_name {
+		position: absolute;
+		transform: translate(0%, -50%);
+		top: 0px;
+		width: auto;
+		right: 0px;
+		overflow: hidden;
+		z-index: 101;
+		font-family: 'Lilita One', cursive;
+		color: #ffd420;
+		font-size: 30px;
+		vertical-align: middle;
+		text-shadow:
+			-2px -2px 0 #000,
+			-2px 0px 0 #000,
+			2px -2px 0 #000,
+			2px 0px 0 #000,
+			-2px 2px 0 #000,
+			0px 4px 0 #000,
+			2px 2px 0 #000,
+			0px -2px 0 #000;
+	}
+
+	.sp_name p {
+		position: relative;
+		background: rgba(0, 0, 0, .5);
+		right: -100%;
+		padding: 0px;
+		margin: 0px;
+		padding: 5px 70px 5px 10px;
+		transition-duration: .3s;
+	}
+
+	.winner_glow {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		animation: rotating_glow 10s infinite;
+		animation-timing-function: linear;
+		z-index: -1;
+	}
+
+	@keyframes rotating_glow {
+		0% {
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+
+		100% {
+			transform: translate(-50%, -50%) rotate(360deg);
+		}
+	}
+
+	.portrait_mode {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 9;
+        background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+        top: 0px;
+	}
+
+	.portrait_mode img {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		filter: invert(1);
+		left: 50%;
+		top: 50%;
+	}
+
+	@media only screen and (orientation:portrait) {
+
+		.portrait_mode {
+			display: block;
+		}
+
+	}
+
+	@media only screen and (orientation:landscape) {
+
+		.portrait_mode {
+			display: none;
+		}
+	}
+
+	.sp_icon_select {
+		position: relative;
+		max-height: 50px;
+		max-width: 50px;
+	}
+
+	.qs_bg{
+        position: absolute;
+        background: rgba(0,0,0,.7);
+        z-index: 10;
+        display: none;
+        width: 100%;
+        height: 100%;  
+        text-align: center; 
+        font-family: 'Calibri';
+		color: white; 
+    }
+    
+    .qs_window {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        min-width: 300px;
+        background: linear-gradient(110deg, rgba(0,91,227,1) 19%, rgba(0,102,255,1) 20%, rgba(0,102,255,1) 80%, rgba(0,91,227,1) 81%);
+        padding: 20px;
+        border: 3px solid #000;
+        box-shadow: 5px 5px black;
+    }
+
+    .qs_window p {
+        margin-bottom: 20px;
+    }
+
+    .qs_close {
+        position: absolute;
+        top: -10px;
+        z-index: 10;
+        right: -10px;
+        cursor: pointer;
+        height: 50px;
+    }
+
+    .qs_window input[type="text"] {
+        position: relative;
+        font-family: 'Lilita One', cursive;
+        font-size: 20px;
+        width: 155px;
+        color: white;
+        background: none;
+        border: none;
+        border-bottom: 2px solid white;
+        text-transform: uppercase;
+        outline: none;
+    }
+
+    .qs_window input[type="text"]:focus {
+    box-shadow: 0px 1px white;
+    }
+
+    .qs_window input[type="text"]::placeholder {
+        color: white;
+        opacity: .5; /* Firefox */
+      }
+
+	.br_options {
+		position: relative;
+        text-align: center;
+        font-family: 'Lilita One', cursive;
+        color: white;
+    }
+    
+    .pid_help {
+        height: 200px;
+        border-radius: 20px;
+        border: 2px black solid;
+        box-shadow: 3px 3px black;
+    }
+
+    .full_popup {
+        position: absolute;
+        z-index: 8;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, rgba(0, 101, 168, 1) 0%, rgba(0, 67, 134, 1) 100%);
+        top: 0px;
+        display: none;
+    }
+
+    .fp_message {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        color: white;
+        font-family: 'Calibri';
+        text-align: center;
+    }
+
+    .fp_message img {
+        filter: invert(1);
+    }
+
+    .fswrapper {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 5;
+	}
+
+	.to_fullscreen {
+		position: relative;
+		background-color: #49dc2c;
+		box-shadow: 0px 7px 0px 0px #10b848;
+        font-family: 'Lilita One', cursive;
+        font-size: 15px;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.fswrapper:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.fswrapper:active>.to_fullscreen {
+		box-shadow: 0px 3px 0px 0px #10b848;
+    }
+
+
+    .sawrapper_sp {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 6;
+	}
+
+	.selectall_sp {
+		position: relative;
+		background-color: #ffc400;
+		box-shadow: 0px 7px 0px 0px rgb(223, 182, 0);
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.sawrapper_sp:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.sawrapper_sp:active>.selectall_sp {
+		box-shadow: 0px 3px 0px 0px rgb(223, 182, 0);
+	}
+
+	.dawrapper_sp {
+		top: 0px;
+		font-size: 12px;
+		position: relative;
+		display: inline-block;
+		border: 2px solid black;
+		padding-bottom: 7px;
+		padding-top: 0px;
+		transition-duration: 0.2s;
+		z-index: 5;
+	}
+
+	.deselectall_sp {
+		position: relative;
+		background-color: #e97c00;
+		box-shadow: 0px 7px 0px 0px #b86110;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		padding: 5px;
+		text-shadow: 1px 1px black;
+		cursor: pointer;
+		transition-duration: 0.2s;
+		text-align: center;
+	}
+
+	.dawrapper_sp:active {
+		top: 4px;
+		padding-bottom: 3px;
+	}
+
+	.dawrapper_sp:active>.deselectall_sp {
+		box-shadow: 0px 3px 0px 0px #b86110;
+    }
+    
+    .sp_buttons {
+        display: inline-block;
+        position:relative;
+    }
+
+	.winner_name {
+		position: absolute;
+		bottom: 9%;
+		right: 3%;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		height: 20%;
+		font-size: 6vw;
+		letter-spacing: -1px;
+		text-shadow:
+			-2px -2px 0 #000,
+			-2px 0px 0 #000,
+			2px -2px 0 #000,
+			2px 0px 0 #000,
+			-2px 2px 0 #000,
+			0px 2px 0 #000,
+			3px 3px 0 #000,
+			0px -2px 0 #000,
+			1px 1px 0 #000,
+			2px 2px 0 #000,
+			4px 4px 0 #000,
+			5px 5px 0 #000,
+			6px 6px 0 #000,
+			-2px 1px 0 #000,
+			-1px 2px 0 #000,
+			0px 3px 0 #000,
+			1px 4px 0 #000,
+			2px 5px 0 #000,
+			3px 6px 0 #000,
+			1px -2px 0 #000,
+			2px -1px 0 #000,
+			3px 0px 0 #000,
+			4px 1px 0 #000,
+			5px 2px 0 #000,
+			6px 3px 0 #000;
+		opacity: 0;
+		transition-duration: .5s;
+	}
+
+	.choose_brawler_name {
+		position: absolute;
+		bottom: 9%;
+		right: 3%;
+		font-family: 'Lilita One', cursive;
+		color: white;
+		height: 20%;
+		font-size: 2.6vw;
+		transition-duration: .2s;
+		text-shadow:
+			-1px -1px 0 #000,
+			-1px 0px 0 #000,
+			1px -1px 0 #000,
+			1px 0px 0 #000,
+			-1px 1px 0 #000,
+			0px 1px 0 #000,
+			2px 2px 0 #000,
+			3px 3px 0 #000,
+			0px -1px 0 #000,
+			1px 1px 0 #000,
+			3px 3px 0 #000,
+			-1px 1px 0 #000,
+			0px 2px 0 #000,
+			1px 3px 0 #000,
+			1px -1px 0 #000,
+			2px 0px 0 #000,
+			3px 1px 0 #000;
+	}
+
+	.bck_anim {
+		transition-duration: 5s;
+		transition-timing-function: linear;
+	}
