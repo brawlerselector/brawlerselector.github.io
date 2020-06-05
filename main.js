@@ -45,6 +45,7 @@ function update_brawlers() {
         "frank": [],
         "bibi": [],
         "bea": [],
+        "nani": [],
         "mortis": [],
         "tara": [],
         "gene": [],
@@ -118,6 +119,7 @@ br_voices = {
     "frank": 6,
     "bibi": 6,
     "bea": 5,
+    "nani": 4,
     "mortis": 4,
     "tara": 3,
     "gene": 14,
@@ -156,6 +158,7 @@ all_star_powers = {
     "frank": ["Power Grab", "Sponge"],
     "bibi": ["Home Run", "Batting Stance"],
     "bea": ["Insta Beeload", "Honey Coat"],
+    "nani": ["Autofocus"],
     "mortis": ["Creepy Harvest", "Coiled Snake"],
     "tara": ["Black Portal", "Healing Shade"],
     "gene": ["Magic Puffs", "Spirit Slap"],
@@ -166,7 +169,7 @@ all_star_powers = {
     "crow": ["Extra Toxic", "Carrion Crow"],
     "leon": ["Smoke Trails", "Invisiheal"],
     "sandy": ["Rude Sands", "Healing Winds"],
-    "gale": ["Blustery Blow"]
+    "gale": ["Blustery Blow", "Second Wind"]
 }
 star_powers = {
     "8-bit": [],
@@ -194,6 +197,7 @@ star_powers = {
     "frank": [],
     "bibi": [],
     "bea": [],
+    "nani": [],
     "mortis": [],
     "tara": [],
     "gene": [],
@@ -206,7 +210,7 @@ star_powers = {
     "sandy": [],
     "gale": []
 }
-all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "mortis", "tara", "gene", "max", "mr. p", "sprout", "spike", "crow", "leon", "sandy", "gale"];
+all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "nani", "mortis", "tara", "gene", "max", "mr. p", "sprout", "spike", "crow", "leon", "sandy", "gale"];
 brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock"];
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -507,6 +511,7 @@ $(".dawrapper_sp").on("click", function () {
         "frank": [],
         "bibi": [],
         "bea": [],
+        "nani": [],
         "mortis": [],
         "tara": [],
         "gene": [],
