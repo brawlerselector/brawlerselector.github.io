@@ -1,22 +1,3 @@
-var player_brawlers;
-
-function get_player_data() {
-    player_id = $("#player_id").val().toUpperCase().replace("#", "");
-    $.ajax({
-        type: 'GET',
-        url: 'https://buttonapp.000webhostapp.com/test.php',
-        data: "player_id=" + player_id,
-
-
-        success: function (data) {
-            $(".qs_bg").css("display", "none");
-            player_brawlers = JSON.parse(data)["brawlers"];
-            update_brawlers();
-            console.log(player_brawlers);
-        }
-    });
-};
-
 function update_brawlers() {
     brawlers = [];
     star_powers = {
@@ -120,97 +101,25 @@ br_voices = {
     "bibi": 6,
     "bea": 5,
     "nani": 4,
+    "edgar": 11,
     "mortis": 4,
     "tara": 3,
     "gene": 14,
     "max": 5,
     "mr. p": 5,
     "sprout": 4,
+    "byron": 10,
     "spike": 0,
     "crow": 3,
     "leon": 5,
     "sandy": 6,
-    "gale": 4
+    "amber": 11,
+    "gale": 4,
+    "surge": 10,
+    "colette": 11,
+    "lou": 12
 }
-all_star_powers = {
-    "8-bit": ["Boosted Booster", "Extra Life"],
-    "shelly": ["Shell Shock", "Band-Aid"],
-    "nita": ["Bear With Me", "Hyper Bear"],
-    "colt": ["Slick Boots", "Magnum Special"],
-    "bull": ["Berserker", "Tough Guy"],
-    "jessie": ["Energize", "Shocky"],
-    "brock": ["Incendiary", "Rocket No. Four"],
-    "dynamike": ["Dyna-Jump", "Demolition"],
-    "bo": ["Circling Eagle", "Snare a Bear"],
-    "tick": ["Well Oiled", "Automa-Tick Reload"],
-    "emz": ["Bad Karma", "Hype"],
-    "el primo": ["El Fuego", "Meteor Rush"],
-    "barley": ["Medical Use", "Extra Noxious"],
-    "poco": ["Da Capo!", "Screeching Solo"],
-    "rosa": ["Plant Life", "Thorny Gloves"],
-    "rico": ["Super Bouncy", "Robo Retreat"],
-    "darryl": ["Steel Hoops", "Rolling Reload"],
-    "penny": ["Last Blast", "Balls of Fire"],
-    "carl": ["Power Throw", "Protective Pirouette"],
-    "jacky": ["Counter Crush", "Hardy Hard Hat"],
-    "piper": ["Ambush", "Snappy Sniping"],
-    "pam": ["Mama's Hug", "Mama's Squeeze"],
-    "frank": ["Power Grab", "Sponge"],
-    "bibi": ["Home Run", "Batting Stance"],
-    "bea": ["Insta Beeload", "Honey Coat"],
-    "nani": ["Autofocus"],
-    "mortis": ["Creepy Harvest", "Coiled Snake"],
-    "tara": ["Black Portal", "Healing Shade"],
-    "gene": ["Magic Puffs", "Spirit Slap"],
-    "max": ["Super Charged", "Run n' Gun"],
-    "mr. p": ["Handle With Care", "Tin Can"],
-    "sprout": ["Overgrowth", "Photosynthesis"],
-    "spike": ["Fertilize", "Curveball"],
-    "crow": ["Extra Toxic", "Carrion Crow"],
-    "leon": ["Smoke Trails", "Invisiheal"],
-    "sandy": ["Rude Sands", "Healing Winds"],
-    "gale": ["Blustery Blow", "Second Wind"]
-}
-star_powers = {
-    "8-bit": [],
-    "shelly": [],
-    "nita": [],
-    "colt": [],
-    "bull": [],
-    "jessie": [],
-    "brock": [],
-    "dynamike": [],
-    "bo": [],
-    "tick": [],
-    "emz": [],
-    "el primo": [],
-    "barley": [],
-    "poco": [],
-    "rosa": [],
-    "rico": [],
-    "darryl": [],
-    "penny": [],
-    "carl": [],
-    "jacky": [],
-    "piper": [],
-    "pam": [],
-    "frank": [],
-    "bibi": [],
-    "bea": [],
-    "nani": [],
-    "mortis": [],
-    "tara": [],
-    "gene": [],
-    "max": [],
-    "mr. p": [],
-    "sprout": [],
-    "spike": [],
-    "crow": [],
-    "leon": [],
-    "sandy": [],
-    "gale": []
-}
-all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "nani", "mortis", "tara", "gene", "max", "mr. p", "sprout", "spike", "crow", "leon", "sandy", "gale"];
+all_brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock", "dynamike", "bo", "tick", "8-bit", "emz", "el primo", "barley", "poco", "rosa", "rico", "darryl", "penny", "carl", "jacky", "piper", "pam", "frank", "bibi", "bea", "nani", "edgar", "mortis", "tara", "gene", "max", "mr. p", "sprout", "byron", "spike", "crow", "leon", "sandy", "amber", "gale", "surge", "colette", "lou"];
 brawlers = ["shelly", "nita", "colt", "bull", "jessie", "brock"];
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -281,19 +190,9 @@ $(".settings").on("click", function () {
         menu_click_sound.play();
         for (brawler in all_brawlers) {
             if (brawlers.includes(all_brawlers[brawler])) {
-                $(".scroller").append("<div class=\"select_brawler\" brawler=\"" + all_brawlers[brawler] + "\"><img class=\"brawler_img\" src=\"img/" + all_brawlers[brawler] + ".png\"><div class=\"choose_brawler_name\">" + all_brawlers[brawler].toUpperCase() + "</div><div class=\"br_starpowers\"></div></div>")
+                $(".scroller").append("<div class=\"select_brawler\" brawler=\"" + all_brawlers[brawler] + "\"><img class=\"brawler_img\" src=\"img/" + all_brawlers[brawler] + ".png\"></div>")
             } else {
-                $(".scroller").append("<div class=\"select_brawler unselected\" brawler=\"" + all_brawlers[brawler] + "\"><img class=\"brawler_img\" src=\"img/" + all_brawlers[brawler] + ".png\"><div class=\"choose_brawler_name unselected\" >" + all_brawlers[brawler].toUpperCase() + "</div><div class=\"br_starpowers\"></div></div>")
-            }
-            if (rand_sp == 1) {
-                $(".choose_brawler_name").css("bottom", "34%");
-                for (sp in all_star_powers[all_brawlers[brawler]]) {
-                    if (star_powers[all_brawlers[brawler]].includes(all_star_powers[all_brawlers[brawler]][sp])) {
-                        $(".select_brawler[brawler='" + all_brawlers[brawler] + "'] .br_starpowers").append("<div class=\"brawler_sp\" starpower=\"" + all_star_powers[all_brawlers[brawler]][sp] + "\"><img class=\"sp_bg\" src=\"sp/starpower.png\"><img class=\"sp_icon_image\" src=\"sp/" + all_star_powers[all_brawlers[brawler]][sp].toLowerCase() + ".png\"></div>")
-                    } else {
-                        $(".select_brawler[brawler='" + all_brawlers[brawler] + "'] .br_starpowers").append("<div class=\"brawler_sp sp_unselected\" starpower=\"" + all_star_powers[all_brawlers[brawler]][sp] + "\"><img class=\"sp_bg\" src=\"sp/starpower.png\"><img class=\"sp_icon_image\" src=\"sp/" + all_star_powers[all_brawlers[brawler]][sp].toLowerCase() + ".png\"></div>")
-                    }
-                }
+                $(".scroller").append("<div class=\"select_brawler unselected\" brawler=\"" + all_brawlers[brawler] + "\"><img class=\"brawler_img\" src=\"img/" + all_brawlers[brawler] + ".png\"></div>")
             }
         };
         $(".brawler_wrapper").fadeIn(300, function () {
@@ -317,21 +216,6 @@ $(".settings").on("click", function () {
 
             });
 
-            $(".brawler_sp").on("click", function () {
-
-                brawler_name = $(this).parent().parent().attr("brawler");
-                sp_name = $(this).attr("starpower");
-                if (star_powers[brawler_name].includes(sp_name) == false) {
-                    star_powers[brawler_name].push(sp_name);
-                    $(this).removeClass("sp_unselected");
-                } else {
-                    index = star_powers[brawler_name].indexOf(sp_name);
-                    star_powers[brawler_name].splice(index, 1);
-                    $(this).addClass("sp_unselected");
-
-                }
-
-            });
         });
     } else if (brawlers.length > 0) {
         menu_back_sound.play();
@@ -354,19 +238,13 @@ var option = {
     duration: 1.5,
     stopImageNumber: -1,
     startCallback: function () {
-        $(".winner_name").text(brawlers[p.stopImageNumber].toUpperCase());
         if (rm_enabled == 1) {
             roulette_sound.play();
         }
         $(".ctr").css("opacity", "0");
         $(".invi_wall").css("display", "block");
-        if (rand_sp == 1 && star_powers[brawlers[p.stopImageNumber]].length > 0) {
-            chosen_sp = star_powers[brawlers[p.stopImageNumber]][randint(0, star_powers[brawlers[p.stopImageNumber]].length - 1)]
-            $(".sp_icon").attr("src", "sp/" + chosen_sp.toLowerCase() + ".png");
-            $(".sp_name p").text(chosen_sp);
-        }
         if (br_voice_play == 1 && br_voices[brawlers[p.stopImageNumber]] > 0) {
-            br_voice.src = "sfx/" + brawlers[p.stopImageNumber] + " (" + randint(1, br_voices[brawlers[p.stopImageNumber]]) + ").ogg";
+            br_voice.src = "sfx/" + brawlers[p.stopImageNumber] + "/" + brawlers[p.stopImageNumber] + " (" + randint(1, br_voices[brawlers[p.stopImageNumber]]) + ").ogg";
             hasvoice = 1
         } else {
             hasvoice = 0
@@ -380,21 +258,9 @@ var option = {
         }
         $(".winner .winner_img").attr("src", "img/" + brawlers[p.stopImageNumber] + ".png");
         $(".winner").css({ "transform": "translate(-50%, -50%) scale(1.2)", "visibility": "visible" });
-        $(".winner_name").css("opacity", "1");
 
-        if (rand_sp == 1 && star_powers[brawlers[p.stopImageNumber]].length > 0) {
-            setTimeout(function () {
-                sp_sfx.play();
-                $(".sp_icon").css("transform", "translate(50%, -50%) scale(1)");
-                $(".winner_sp").css("transform", "translate(50%, -50%) scale(1)");
-                setTimeout(function () {
-                    $(".sp_name p").css("right", "0px");
-                }, 500)
-            }, 1000);
-            voice_dur = 2100;
-        } else {
-            voice_dur = 1000;
-        }
+        voice_dur = 1000;
+
         if (brawlers.length > 1 && br_remove == 1) {
             if (set_opened == 1) {
                 $("p").filter(function () { return ($(this).text() === brawlers[p.stopImageNumber].toUpperCase()) }).parent().find(".checkbox").prop("checked", false);
@@ -438,7 +304,6 @@ $(".winner").on("click", function () {
         $(".roulette").append("<img src=\"img/" + brawlers[brawler] + ".png\"/>")
     }
     $(".winner").css({ "transform": "translate(-50%, -50%) scale(1)", "visibility": "hidden" });
-    $(".winner_name").css("opacity", "0");
     setTimeout(function () {
         $(".hideIt").css({ "opacity": "0", "visibility": "hidden", "z-index": "1" });
     }, 100);
@@ -479,53 +344,6 @@ $(".qs_close").on("click", function () {
     $(".qs_bg").css("display", "none");
 });
 
-$(".sawrapper_sp").on("click", function () {
-    star_powers = all_star_powers;
-    $(".brawler_sp").removeClass("sp_unselected");
-});
-
-$(".dawrapper_sp").on("click", function () {
-    star_powers = {
-        "8-bit": [],
-        "shelly": [],
-        "nita": [],
-        "colt": [],
-        "bull": [],
-        "jessie": [],
-        "brock": [],
-        "dynamike": [],
-        "bo": [],
-        "tick": [],
-        "emz": [],
-        "el primo": [],
-        "barley": [],
-        "poco": [],
-        "rosa": [],
-        "rico": [],
-        "darryl": [],
-        "penny": [],
-        "carl": [],
-        "jacky": [],
-        "piper": [],
-        "pam": [],
-        "frank": [],
-        "bibi": [],
-        "bea": [],
-        "nani": [],
-        "mortis": [],
-        "tara": [],
-        "gene": [],
-        "sprout": [],
-        "max": [],
-        "mr. p": [],
-        "spike": [],
-        "crow": [],
-        "leon": [],
-        "sandy": [],
-        "gale": []
-    }
-    $(".brawler_sp").addClass("sp_unselected");
-});
 
 $(".scroller").mousedown(function () {
     $(this).mousemove(function () {
@@ -564,51 +382,6 @@ $("#br_voice_play").on("click", function () {
         $(this).addClass("opt_on");
         $(this).text("ON")
     }
-    menu_click_sound.play();
-})
-
-$("#random_sp").on("click", function () {
-    if (rand_sp == 1) {
-        rand_sp = 0;
-        $(this).removeClass("opt_on");
-        $(this).addClass("opt_off");
-        $(this).text("OFF");
-        $(".choose_brawler_name").css("bottom", "9%");
-        $(".brawler_sp").remove();
-        $(".sp_buttons").css("display", "none");
-    } else {
-        rand_sp = 1;
-        $(this).removeClass("opt_off");
-        $(this).addClass("opt_on");
-        $(this).text("ON");
-        $(".choose_brawler_name").css("bottom", "55px");
-        $(".sp_buttons").css("display", "inline-block");
-        for (brawler in all_brawlers) {
-            for (sp in all_star_powers[all_brawlers[brawler]]) {
-                if (star_powers[all_brawlers[brawler]].includes(all_star_powers[all_brawlers[brawler]][sp])) {
-                    $(".select_brawler[brawler='" + all_brawlers[brawler] + "'] .br_starpowers").append("<div class=\"brawler_sp\" starpower=\"" + all_star_powers[all_brawlers[brawler]][sp] + "\"><img class=\"sp_bg\" src=\"sp/starpower.png\"><img class=\"sp_icon_image\" src=\"sp/" + all_star_powers[all_brawlers[brawler]][sp].toLowerCase() + ".png\"></div>")
-                } else {
-                    $(".select_brawler[brawler='" + all_brawlers[brawler] + "'] .br_starpowers").append("<div class=\"brawler_sp sp_unselected\" starpower=\"" + all_star_powers[all_brawlers[brawler]][sp] + "\"><img class=\"sp_bg\" src=\"sp/starpower.png\"><img class=\"sp_icon_image\" src=\"sp/" + all_star_powers[all_brawlers[brawler]][sp].toLowerCase() + ".png\"></div>")
-                }
-            }
-        }
-        $(".brawler_sp").on("click", function () {
-
-            brawler_name = $(this).parent().parent().attr("brawler");
-            sp_name = $(this).attr("starpower");
-            if (star_powers[brawler_name].includes(sp_name) == false) {
-                star_powers[brawler_name].push(sp_name);
-                $(this).removeClass("sp_unselected");
-            } else {
-                index = star_powers[brawler_name].indexOf(sp_name);
-                star_powers[brawler_name].splice(index, 1);
-                $(this).addClass("sp_unselected");
-
-            }
-
-        });
-    }
-    $('img').on('dragstart', function (event) { event.preventDefault(); });
     menu_click_sound.play();
 })
 
